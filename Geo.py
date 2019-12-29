@@ -5,7 +5,9 @@ from selenium.webdriver.common.by import By
 
 City = "London"
 
-HotelDict = {'Best Western London Peckham Hotel': ['$53', '3.7'], 'hub by Premier Inn London Westminster Abbey hotel': ['$111', '4.6'], 'Holiday Inn Express London - Ealing': ['$59', '4.5'], 'Citadines Trafalgar Square London (Apart Hotel London)': ['$152', '4.3']}
+HotelDict = {'Kensington Suite Hotel':
+['$50', '3.0'], 'Best Western London Peckham Hotel': ['$58', '3.7'], 'Holiday Inn Express London - Ealing': ['$59',
+                                                                                                         '4.5'], 'Premier Inn London Wimbledon (Broadway) hotel': ['$48', '4.6']}
 
 TourismDict = {'Big Ben': "London's iconic national timepiece", 'Coca-Cola London Eye': 'Iconic riverside observation wheel', 'Tower of London': 'Medieval castle housing the Crown Jewels', 'Tower Bridge': 'Iconic Victorian turreted bridge'}
 
@@ -24,18 +26,28 @@ def nametoLoc(nameList, city):
         try:
             driver.get(mainURL)
             data = driver.find_element_by_xpath(xPath)
-            addressList.append(returnAddress(data.text))
-            print("Located: " + place)
+            locAddress = returnAddress(data.text)
+            addressList.append(locAddress)
+            print("Address Determined: " + place)
         except:
             print("Unable to locate: " + place)
 
 
     geoCoords = []
     for address in addressList:
-        currentURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address.replace(" ", "+") + "&key=AIzaSyDARwDR9pYqIDIQrD5yYNtitLkrPQr58wU"
-        data = requests.get(currentURL).json()
-        coords = data['results'][0]['geometry']['location']
-        geoCoords.append([coords['lat'], coords['lng']])
+        if address is not None:
+            try:
+                currentURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address.replace(" ", "+") + "&key=AIzaSyDARwDR9pYqIDIQrD5yYNtitLkrPQr58wU"
+                data = requests.get(currentURL).json()
+                coords = data['results'][0]['geometry']['location']
+                geoCoords.append([coords['lat'], coords['lng']])
+                print("Geo Located: " + str(address))
+            except:
+                print("Failed Geo Locate: " + str(address))
+        else:
+            print("Address is None")
+    
+
     return geoCoords
 
 
@@ -56,8 +68,8 @@ TourPlaces = []
 for keys in TourismDict:
     TourPlaces.append(keys)
 
-HotelCoords = nametoLoc(HotelPlaces, City, "Hotel")
-TourismCoords = nametoLoc(TourPlaces, City, "Tourism")
+HotelCoords = nametoLoc(HotelPlaces, City)
+TourismCoords = nametoLoc(TourPlaces, City)
 print(HotelCoords)
 print(TourismCoords)
 driver.close()
