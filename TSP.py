@@ -40,6 +40,7 @@ def checkValidity(fullSequence):
     if(fullSequence[0] in fullSequence[1:-1]):
         return False
     
+    #Makes sure there are no repeats
     fullSequence = fullSequence[1:-1]
     newSequence = []
     for seq in fullSequence:
