@@ -11,12 +11,16 @@ HotelDict = {'Kensington Suite Hotel':
 
 TourismDict = {'Big Ben': "London's iconic national timepiece", 'Coca-Cola London Eye': 'Iconic riverside observation wheel', 'Tower of London': 'Medieval castle housing the Crown Jewels', 'Tower Bridge': 'Iconic Victorian turreted bridge'}
 
-driver = webdriver.Chrome(executable_path = r"/Users/rohitchakravarty/Documents/PersonalProjects/PythonPrograms/TripPlanner/chromedriver")
-
 #Requires: List of places, the city that they're in & hotel or tourist spot
 #Modifies: Nothing
 #Effects: Returns the latitude & longitude coordinates of each place
-def nametoLoc(nameList, city):
+def nametoLoc(infoDict, city):
+    driver = webdriver.Chrome(executable_path = r"/Users/rohitchakravarty/Documents/PersonalProjects/PythonPrograms/TripPlanner/chromedriver")
+    nameList = []
+    for keys in infoDict:
+        nameList.append(keys)
+    
+    
     xPath = "/html/body/div[8]/div[3]/div[10]/div[1]/div[3]/div/div[1]"
 
     addressList = []
@@ -47,7 +51,7 @@ def nametoLoc(nameList, city):
         else:
             print("Address is None")
     
-
+    driver.close()
     return geoCoords
 
 
@@ -59,17 +63,3 @@ def returnAddress(mainStr):
             #Everything after the "Address: "
             return line[9:]
 
-
-HotelPlaces = []
-for keys in HotelDict:
-    HotelPlaces.append(keys)
-
-TourPlaces = []
-for keys in TourismDict:
-    TourPlaces.append(keys)
-
-HotelCoords = nametoLoc(HotelPlaces, City)
-TourismCoords = nametoLoc(TourPlaces, City)
-print(HotelCoords)
-print(TourismCoords)
-driver.close()

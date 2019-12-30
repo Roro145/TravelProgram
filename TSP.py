@@ -1,8 +1,8 @@
 import numpy
 import random
 
-HotelList = [[51.5018592, -0.2126455], [51.4739724, -0.07541099999999999], [51.5098367, -0.3248462], [51.4189637, -0.1987]]
-TouristList = [[51.4998403, -0.1246627], [51.5024625, -0.121064], [40.0428437, -75.38158589999999], [51.5035586, -0.0766852]]
+#HotelList = [[51.5018592, -0.2126455], [51.4739724, -0.07541099999999999], [51.5098367, -0.3248462], [51.4189637, -0.1987]]
+#TouristList = [[51.4998403, -0.1246627], [51.5024625, -0.121064], [40.0428437, -75.38158589999999], [51.5035586, -0.0766852]]
 
 class Point:
     def __init__(self, coords):
@@ -33,7 +33,11 @@ def checkIdenticalSequences(masterList):
 #Modifies: Nothing
 #Effects: checks whether it's a valid possible sequence - only hotel appears twice
 def checkValidity(fullSequence):
+    #Checks to start and end at hotel
     if(fullSequence[0] != fullSequence[-1]):
+        return False
+    #checks to make sure it doesn't visit the hotel during the day
+    if(fullSequence[0] in fullSequence[1:-1]):
         return False
     
     fullSequence = fullSequence[1:-1]
@@ -121,7 +125,7 @@ def parentSelection(popList, hotelLoc):
 def Breed(parent1, parent2, TourList, hotelLoc):
     newPopulation = []
     #Number of 'children'/new population generated
-    for x in range(10000):
+    for x in range(100000):
         currentSequence = []
         #Starts at 1 since first element is already the hotel, ends before since only
         #require the middle elements of TourList, last element is also hotel
@@ -142,23 +146,20 @@ def Breed(parent1, parent2, TourList, hotelLoc):
     return checkIdenticalSequences(newPopulation)
 
 
-#Converts the X-Y coordinates given for each hotel into point objects
-HotelPoints = []
-for x in range (len(HotelList)):
-    HotelPoints.append(Point(HotelList[x]))
+
+def mainTSPGE(HotelList, TouristList):
+    #Converts the X-Y coordinates given for each hotel into point objects
+    HotelPoints = []
+    for x in range (len(HotelList)):
+        HotelPoints.append(Point(HotelList[x]))
     #print("X: " + str(HotelPoints[x].getX()) + " Y: " + str(HotelPoints[x].getY()))
 
-#Converts the X-Y coordinates given for each tourist spot into point objects
-TouristPoints = []
-for x in range (len(TouristList)):
-    TouristPoints.append(Point(TouristList[x]))
-    #print("X: " + str(TouristPoints[x].getX()) + " Y: " + str(TouristPoints[x].getY()))
-
-
-
-
-
-def mainTSPGE():
+    #Converts the X-Y coordinates given for each tourist spot into point objects
+    TouristPoints = []
+    for x in range (len(TouristList)):
+        TouristPoints.append(Point(TouristList[x]))
+        #print("X: " + str(TouristPoints[x].getX()) + " Y: " + str(TouristPoints[x].getY()))
+    
     BestFitness = 10000
 
     for x in range(len(HotelPoints)):
@@ -167,7 +168,7 @@ def mainTSPGE():
         PopulationList = generatePopulation(TouristPoints, 5, HotelPoints[x])
 
         #Uses the genetic algorithm to determine the best possible sequences
-        for x in range(2):
+        for x in range(1):
             print("Length of Population List: " + str(len(PopulationList)))
             returnList = parentSelection(PopulationList, HotelPoints[0])
             currentParent1 = returnList[0]
@@ -197,8 +198,9 @@ def mainTSPGE():
         print("X: " + str(points.getX()) + " Y: " + str(points.getY()))
         standardArray.append([points.getX(), points.getY()])
 
+
     return standardArray
 
 
-    
-print(mainTSPGE())
+
+#mainTSPGE(HotelList, TouristList)
