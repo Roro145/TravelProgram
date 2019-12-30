@@ -23,6 +23,7 @@ def genTourist(City):
     driver.close()
 
     print("Tourist Locations Complete")
+    #print(dataDict)
     return dataDict
 
 #print(genTourist(mainCity))
