@@ -10,6 +10,31 @@ General Program Flow:
 
 Sample Program Run:
 
+Concise Input/output:
+
+input:
+{
+"StartDate": "January 21st",
+"EndDate"  : "January 30th",
+"StartLoc" : "Detroit",
+"EndLoc"   : "Paris"
+}
+
+
+Output:
+{'Flights': {'Multiple airlines 7h 57m+ Connecting': '$789+', 'Turkish Airlines 21h 35m+ Connecting': '$842+', 'Air
+France 7h 57m Nonstop': '$1,098+', 'Delta 7h 57m Nonstop': '$1,098+', 'Multiple airlines 7h 57m Nonstop': '$1,098+',
+'Other airlines 9h 25m+ Connecting': '$909+', 'Save $120 – Connecting flights from $669 if you fly from Windsor (YQG)':
+'h flights+'}, 
+'Hotels': {'Grand Hôtel Clichy Paris': ['$97', '4.0'], 'Hôtel A La Villa Des Artistes': ['$109', '4.3'],
+'Paris France Hôtel': ['$114', '4.2'], 'Novotel Tour Eiffel Hotel': ['$147', '4.0']}, 
+'Tourist Spots': {'Eiffel Tower': 'Landmark 324m-high 19th-century tower', 'Louvre Museum': 'Landmark art museum with vast collection', 'Cathédrale Notre-Dame de Paris': 'Iconic Gothic church with literary link', 'Arc de Triomphe': 'Triumphal arch & national monument'},
+'Ideal Hotel': 'Grand Hôtel Clichy Paris', 
+'Ideal Route': ['Louvre Museum', 'Eiffel Tower', 'Cathédrale Notre-Dame de Paris']}
+
+
+Detailed Example:
+
 Input:
 //POST request to /tripPlan
 
