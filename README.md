@@ -32,6 +32,13 @@ France 7h 57m Nonstop': '$1,098+', 'Delta 7h 57m Nonstop': '$1,098+', 'Multiple 
 'Ideal Hotel': 'Grand Hôtel Clichy Paris', 
 'Ideal Route': ['Louvre Museum', 'Eiffel Tower', 'Cathédrale Notre-Dame de Paris']}
 
+Hotel to stay at: Grand Hôtel Clichy Paris
+
+Order to visit places: 
+Louvre Museum
+Eiffel Tower
+Cathédrale Notre-Dame de Paris
+
 
 Detailed Example:
 
