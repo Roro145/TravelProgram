@@ -41,7 +41,7 @@ def nametoLoc(infoDict, city):
     for address in addressList:
         if address is not None:
             try:
-                currentURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address.replace(" ", "+") + "&key=AIzaSyDARwDR9pYqIDIQrD5yYNtitLkrPQr58wU"
+                currentURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address.replace(" ", "+") + "&key=REMOVED_KEY"
                 data = requests.get(currentURL).json()
                 coords = data['results'][0]['geometry']['location']
                 geoCoords.append([coords['lat'], coords['lng']])
