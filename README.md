@@ -53,8 +53,8 @@ Input:
 }
 
 Output:
-Tourist Locations Complete
-Plane Info Complete
+Tourist Locations Complete\
+Plane Info Complete\
 Hotel Locations Complete
 Address Determined: Holiday Inn Express London - Ealing
 Address Determined: Best Western London Peckham Hotel
